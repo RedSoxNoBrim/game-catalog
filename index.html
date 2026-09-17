@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameShelf</title>
+    <!--
+      tokens.css holds the design decisions — every colour, size, spacing step
+      and radius, as CSS variables. It is loaded FIRST so your own rules can
+      use them: background: var(--surface); padding: var(--space-4);
+      See design/DESIGN.md.
+    -->
+    <link rel="stylesheet" href="design/tokens.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>GameShelf</h1>
+      <!-- A short tagline goes here. Your call what it says. -->
+    </header>
+
+    <main>
+      <!--
+        THIS IS YOUR JOB. Nothing below is written for you.
+
+        You need somewhere to put three things:
+
+          1. The controls  - search box, genre filters, platform filters, sort.
+          2. The count     - "Showing 12 of 42 games".
+          3. The grid      - where the game cards get inserted by JavaScript.
+
+        Decide on the markup and the ids/classes yourself. Think about which
+        elements are the semantically correct ones before you reach for a div.
+      -->
+    </main>
+
+    <!--
+      Script order matters, and it is not a style choice.
+
+      data/games.js defines the GAMES variable. app.js uses it. The browser
+      runs these top to bottom, so if you swap these two lines you will get
+      "GAMES is not defined" and you will be confused for twenty minutes.
+
+      They are at the end of <body> so the HTML above already exists by the
+      time your code runs. If you move them into <head>, add the defer
+      attribute or document.querySelector will hand you null.
+    -->
+    <script src="data/games.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

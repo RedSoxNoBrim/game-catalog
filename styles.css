@@ -1,0 +1,51 @@
+/*
+ * GameShelf styles.
+ *
+ * The reset below is a minimal one so you are not fighting browser defaults on
+ * day one. Everything else is yours to write.
+ *
+ * Before you start: read design/DESIGN.md. It specifies the whole design, and
+ * design/tokens.css (already loaded, before this file) defines every colour,
+ * size, spacing step and radius as a CSS variable. Use them:
+ *
+ *   .card {
+ *     background: var(--surface);
+ *     border: 1px solid var(--border);
+ *     border-radius: var(--radius-lg);
+ *     padding: var(--space-4);
+ *   }
+ *
+ * If you are about to type a hex code or a pixel value, check the tokens file
+ * first. It is almost certainly in there.
+ *
+ * The cover art for each game is a two-colour gradient, not an image file.
+ * Every game object carries a coverFrom and a coverTo, so you build the cover
+ * in JavaScript:
+ *
+ *   cover.style.background = `linear-gradient(${game.coverFrom}, ${game.coverTo})`;
+ *
+ * That is a real technique, not a shortcut: no broken image links, no
+ * licensing problems, and every card looks different.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Your styles start here. */

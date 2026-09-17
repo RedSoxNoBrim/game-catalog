@@ -1,0 +1,70 @@
+/*
+ * GameShelf design tokens.
+ *
+ * These are the decisions, already made. Colours, type sizes, spacing steps,
+ * corner radii. You should not need to invent a single hex code or pick a
+ * single pixel value for this project — use these.
+ *
+ * This file is loaded BEFORE styles.css in index.html, so you can use any of
+ * these in your own rules:
+ *
+ *   .card {
+ *     background: var(--surface);
+ *     border-radius: var(--radius-lg);
+ *     padding: var(--space-4);
+ *   }
+ *
+ * This is called a design token system, and it is how real products stay
+ * consistent. Change --accent here once and every accented thing on the site
+ * changes with it. Try it.
+ *
+ * You may edit this file if you want to restyle the site later, but do the
+ * project with these values first so you have something to compare against.
+ */
+
+:root {
+  /* ---- colour: surfaces, darkest to lightest ---- */
+  --bg: #0f1115;              /* the page behind everything */
+  --surface: #171a21;         /* cards, the toolbar */
+  --surface-raised: #1e222b;  /* inputs, genre tags on a card */
+
+  /* ---- colour: lines ---- */
+  --border: #272c37;          /* card edges, divider lines */
+  --border-strong: #39404f;   /* input edges, unselected chips */
+
+  /* ---- colour: text, brightest to faintest ---- */
+  --text: #e8eaee;            /* titles, blurbs, anything you must read */
+  --text-muted: #9aa3b2;      /* developer, year, supporting detail */
+  --text-faint: #6d7688;      /* labels, platform lists, placeholders */
+
+  /* ---- colour: accent ---- */
+  --accent: #f2a33c;          /* selected chips, ratings, links */
+  --accent-ink: #14161b;      /* text ON an accent background */
+  --focus: #6ea8fe;           /* keyboard focus ring */
+
+  /* ---- type scale ---- */
+  --step--2: 0.6875rem;       /* 11px - genre tags on a card */
+  --step--1: 0.8125rem;       /* 13px - meta, labels, chips */
+  --step-0: 0.9375rem;        /* 15px - body text, blurbs */
+  --step-1: 1.0625rem;        /* 17px - game titles */
+  --step-2: 1.375rem;         /* 22px - empty-state heading */
+  --step-3: 2rem;             /* 32px - the site title */
+
+  /* ---- spacing scale ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* ---- corner radii ---- */
+  --radius-sm: 6px;           /* the rating badge */
+  --radius: 10px;             /* inputs, buttons */
+  --radius-lg: 14px;          /* cards, the toolbar */
+  --radius-pill: 999px;       /* chips and tags */
+
+  /* ---- type family ---- */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
