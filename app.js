@@ -21,3 +21,42 @@
  */
 
 console.log(`GameShelf loaded ${GAMES.length} games. Here is the first one:`, GAMES[0]);
+
+const grid = document.querySelector("#grid");
+
+const firstCard = () => {
+    const div = document.createElement("div");
+    const cover = document.createElement("div");
+    const footer = document.createElement("div");
+
+    div.classList.add("cards");
+    cover.classList.add("cover");
+    footer.classList.add("footer")
+
+    cover.style.background = `linear-gradient(${GAMES[0].coverFrom}, ${GAMES[0].coverTo})`;
+    div.appendChild(cover);
+
+    Object.entries(GAMES[0]).forEach(([key, value]) => {
+        const p = document.createElement("p");
+        p.classList.add(key);
+
+        p.textContent = ` ${value}`;
+        
+        if (key === "title" || key === "rating") {
+            if (key === "rating") {
+                p.textContent = value.toFixed(1);
+            }
+            cover.appendChild(p)
+        } else if (key === "players" || key === "avgHours") {
+            footer.appendChild(p)
+        } else if (key !== "coverFrom" && key !== "coverTo" && key !== "id") {
+            div.appendChild(p) 
+        };
+    });
+    grid.appendChild(div);
+
+    
+};
+
+firstCard();
+        
