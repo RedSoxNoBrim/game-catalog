@@ -13,7 +13,7 @@ question is ready to ask at the next call instead of losing you an evening.
 ## The steps
 
 - [X] **1. One card on the screen** — built in JavaScript from `GAMES[0]`, not typed into the HTML
-- [ ] **2. All forty-two on the screen** — one ugly column is the correct result here
+- [x] **2. All forty-two on the screen** — one ugly column is the correct result here
 - [ ] **3. Live on GitHub Pages** — paste the URL in a comment below, and put it in the repo description
 - [ ] **4. It matches the design** — grid, cards, colours and spacing, all from `tokens.css`
 - [ ] **5. Search box** — case-insensitive, matches anywhere in the title
