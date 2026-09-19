@@ -14,7 +14,7 @@ question is ready to ask at the next call instead of losing you an evening.
 
 - [X] **1. One card on the screen** — built in JavaScript from `GAMES[0]`, not typed into the HTML
 - [x] **2. All forty-two on the screen** — one ugly column is the correct result here
-- [ ] **3. Live on GitHub Pages** — paste the URL in a comment below, and put it in the repo description
+- [X] **3. Live on GitHub Pages** — paste the URL in a comment below, and put it in the repo description 
 - [ ] **4. It matches the design** — grid, cards, colours and spacing, all from `tokens.css`
 - [ ] **5. Search box** — case-insensitive, matches anywhere in the title
 - [ ] **6. Sorting** — six options, and `GAMES` is never mutated
@@ -42,3 +42,5 @@ question is ready to ask at the next call instead of losing you an evening.
 
 <!-- Anything you want to remember: a bug you hit, something you want to come back to,
      a thing you don't understand yet. This is yours — use it however is useful. -->
+
+<!-- https://redsoxnobrim.github.io/game-catalog/ -->

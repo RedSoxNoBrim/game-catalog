@@ -51,6 +51,21 @@ img {
 
 /* Your styles start here. */
 
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 0 auto;
+  max-width: 1200px;
+
+  padding-top: var(--space-6);
+  padding-right: var(--space-5);
+  padding-left: var(--space-5);
+  padding-bottom: var(--space-7);
+}
+
 header { 
   display: flex;
   justify-content: center;
@@ -65,18 +80,19 @@ header {
 
 #grid {
   display: flex;
-  
-  flex: 1 1 260px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
+  gap: var(--space-4);
   
 }
 
 .cards {
   display: flex;
   flex-direction: column;
+  flex: 1 1 260px;
+  
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -133,12 +149,49 @@ header {
 
 }
 
-.container {
-  display: flex
+.body {
+  display: flex;
   flex-direction: column;
-  
+
+  padding: var(--space-4);
+  gap: var(--space-3);
+}
+
+.year {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.blurb {
+  font-size: var(--step-0);
+  color: var(--text);
+  flex: 1;
+}
+
+.genreTags {
+  background-color: var(--surface-raised);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  padding: 2px 5px;
+}
+
+.genreContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-3);
+  display: flex;
+  flex-wrap: nowrap;
+  font-size: var(--step--1);
+  color: var(--text-faint);
+  padding: var(--space-3);
 }
 
 
-
-  

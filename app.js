@@ -64,24 +64,34 @@ const firstCard = () => {
 
 const cardGrid = () => {
     GAMES.forEach((game) => {
-        const container = document.createElement("div");
-        const cards = document.createElement("div");
+        const body = document.createElement("div");
+        const card = document.createElement("div");
         const cover = document.createElement("div");
         const footer = document.createElement("div");
+        
 
-        container.classList.add("container")
-        cards.classList.add("cards");
+        const genreContainer = document.createElement("div");
+        
+
+
+        body.classList.add("body")
+        card.classList.add("cards");
         cover.classList.add("cover");
         footer.classList.add("footer");
+        
+
+        genreContainer.classList.add("genreContainer");
+        
 
         cover.style.background = `linear-gradient(${game.coverFrom}, ${game.coverTo})`;
 
-        container.appendChild(cards);
-        cards.appendChild(cover)
+        
+        card.appendChild(cover)
 
 
         Object.entries(game).forEach(([key, value]) => {
             const p = document.createElement("p");
+            
             p.classList.add(key);
 
             p.textContent = ` ${value}`;
@@ -91,17 +101,41 @@ const cardGrid = () => {
                     p.textContent = value.toFixed(1);
                 }
                 cover.appendChild(p)
-            } else if (key === "players" || key === "avgHours" || key === "platforms") {
-            footer.appendChild(p)
-            } else if (key !== "coverFrom" && key !== "coverTo" && key !== "id") {
-             cards.appendChild(p) 
-            };
+            }else if (key === "platforms") {
+                p.textContent = value.join(" · ")
+                footer.appendChild(p);
+            } else if (key === "players") {
+                if (game.players === "Both") {
+                    p.textContent = `${game.avgHours}h`;
+                    footer.appendChild(p);
+                } else {
+                p.textContent = `${value} · ${game.avgHours}h`;
+                footer.appendChild(p);
+                }
+            } else if (key === "year") {
+                    p.textContent = `${game.developer} · ${value}`;
+                    body.appendChild(p)
+            } else if (key === "genres") {
+                game.genres.forEach((genre) => {
+                    const genres = document.createElement("p");
+                    genres.classList.add("genreTags")
+
+                    genres.textContent = `${genre}`;
+                    genreContainer.appendChild(genres);
+                    body.appendChild(genreContainer);
+                })
+            } else if (key === "blurb") {
+                    body.appendChild(p) 
+            }
+
+            
         
-        cards.appendChild(footer);
+        card.appendChild(body);
+        card.appendChild(footer);
         
         })
         
-        grid.appendChild(container);
+        grid.appendChild(card);
     })
 }
 
