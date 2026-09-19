@@ -25,16 +25,17 @@ console.log(`GameShelf loaded ${GAMES.length} games. Here is the first one:`, GA
 const grid = document.querySelector("#grid");
 
 const firstCard = () => {
-    const div = document.createElement("div");
+    const cards = document.createElement("div");
     const cover = document.createElement("div");
     const footer = document.createElement("div");
 
-    div.classList.add("cards");
+    cards.classList.add("cards");
     cover.classList.add("cover");
     footer.classList.add("footer")
 
     cover.style.background = `linear-gradient(${GAMES[0].coverFrom}, ${GAMES[0].coverTo})`;
-    div.appendChild(cover);
+    cards.appendChild(cover);
+    
 
     Object.entries(GAMES[0]).forEach(([key, value]) => {
         const p = document.createElement("p");
@@ -47,13 +48,15 @@ const firstCard = () => {
                 p.textContent = value.toFixed(1);
             }
             cover.appendChild(p)
-        } else if (key === "players" || key === "avgHours") {
+        } else if (key === "players" || key === "avgHours" || key === "platforms") {
             footer.appendChild(p)
         } else if (key !== "coverFrom" && key !== "coverTo" && key !== "id") {
-            div.appendChild(p) 
+            cards.appendChild(p) 
         };
+
+        cards.appendChild(footer);
     });
-    grid.appendChild(div);
+    grid.appendChild(cards);
 
     
 };
