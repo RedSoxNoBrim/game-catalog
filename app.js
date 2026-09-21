@@ -62,8 +62,8 @@ const firstCard = () => {
 };
 
 
-const cardGrid = () => {
-    GAMES.forEach((game) => {
+const cardGrid = (games) => {
+    games.forEach((game) => {
         const body = document.createElement("div");
         const card = document.createElement("div");
         const cover = document.createElement("div");
@@ -138,9 +138,27 @@ const cardGrid = () => {
         })
         card.appendChild(body);
         card.appendChild(footer);
-        
+
         grid.appendChild(card);
     })
 }
 
-cardGrid()
+cardGrid(GAMES);
+
+
+const searchBar = () => {
+    const search = document.querySelector("#searchBar")
+    const grid = document.querySelector("#grid")
+
+    search.addEventListener("change", () => {
+        console.log("Yea you searchin")
+        grid.replaceChildren();
+        const filteredGames = GAMES.filter((game) => game.title.toLowerCase().includes(search.value.toLowerCase()))
+        console.log(filteredGames)
+        cardGrid(filteredGames);
+        
+    })
+}
+
+
+searchBar();
