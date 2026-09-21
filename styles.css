@@ -82,7 +82,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 
   gap: var(--space-4);
   
@@ -194,4 +194,11 @@ header {
   padding: var(--space-3);
 }
 
+.platforms {
+  margin-right: auto;
+}
+
+.players {
+  text-wrap: nowrap;
+}
 

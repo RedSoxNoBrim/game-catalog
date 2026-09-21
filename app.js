@@ -105,13 +105,16 @@ const cardGrid = () => {
                 p.textContent = value.join(" · ")
                 footer.appendChild(p);
             } else if (key === "players") {
-                if (game.players === "Both") {
+                const platformText = game.platforms.join(" · ");
+
+                if (game.players === "Both" || platformText.length > 8) {
                     p.textContent = `${game.avgHours}h`;
-                    footer.appendChild(p);
+                    
                 } else {
                 p.textContent = `${value} · ${game.avgHours}h`;
-                footer.appendChild(p);
+                
                 }
+                footer.appendChild(p)
             } else if (key === "year") {
                     p.textContent = `${game.developer} · ${value}`;
                     body.appendChild(p)
@@ -130,10 +133,11 @@ const cardGrid = () => {
 
             
         
-        card.appendChild(body);
-        card.appendChild(footer);
+        
         
         })
+        card.appendChild(body);
+        card.appendChild(footer);
         
         grid.appendChild(card);
     })
