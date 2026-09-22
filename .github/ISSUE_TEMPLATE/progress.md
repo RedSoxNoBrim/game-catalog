@@ -16,8 +16,8 @@ question is ready to ask at the next call instead of losing you an evening.
 - [x] **2. All forty-two on the screen** — one ugly column is the correct result here
 - [X] **3. Live on GitHub Pages** — paste the URL in a comment below, and put it in the repo description 
 - [x] **4. It matches the design** — grid, cards, colours and spacing, all from `tokens.css`
-- [ ] **5. Search box** — case-insensitive, matches anywhere in the title
-- [ ] **6. Sorting** — six options, and `GAMES` is never mutated
+- [x] **5. Search box** — case-insensitive, matches anywhere in the title
+- [X] **6. Sorting** — six options, and `GAMES` is never mutated
 - [ ] **7. Genre filters** — the list is built from the data, not typed out
 - [ ] **8. Platform filters** — same again
 - [ ] **9. Everything works together** — search + both filters + sort, all at once

@@ -99,9 +99,16 @@ const cardGrid = (games) => {
             if (key === "title" || key === "rating") {
                 if (key === "rating") {
                     p.textContent = value.toFixed(1);
+                    cover.appendChild(p)
+                } else {
+                    const header = document.createElement("h2")
+                    header.classList.add(key);
+
+                    header.textContent = `${value}`
+                    cover.appendChild(header);
                 }
-                cover.appendChild(p)
-            }else if (key === "platforms") {
+                
+            } else if (key === "platforms") {
                 p.textContent = value.join(" · ")
                 footer.appendChild(p);
             } else if (key === "players") {
@@ -109,7 +116,7 @@ const cardGrid = (games) => {
 
                 if (game.players === "Both" || platformText.length > 8) {
                     p.textContent = `${game.avgHours}h`;
-                    
+                
                 } else {
                 p.textContent = `${value} · ${game.avgHours}h`;
                 
@@ -150,7 +157,7 @@ const searchBar = () => {
     const search = document.querySelector("#searchBar")
     const grid = document.querySelector("#grid")
 
-    search.addEventListener("change", () => {
+    search.addEventListener("input", () => {
         console.log("Yea you searchin")
         grid.replaceChildren();
         const filteredGames = GAMES.filter((game) => game.title.toLowerCase().includes(search.value.toLowerCase()))
@@ -162,3 +169,48 @@ const searchBar = () => {
 
 
 searchBar();
+
+
+const sortingOptions = () => {
+    const grid = document.querySelector("#grid")
+    const sort = document.querySelector("#sort")
+            
+
+    const sortGames = (sortBy) => {
+        const [property, direction] = sortBy.split("-");
+        
+        const highestSorted = GAMES.toSorted((a,b) => a[property] - b[property]);
+        const lowestSorted = GAMES.toSorted((a,b) => b[property] - a[property]);
+        const sortAtoZ = GAMES.toSorted((a,b) => a.title.localeCompare(b.title));
+        const sortZtoA = GAMES.toSorted((a,b) => b.title.localeCompare(a.title));
+
+
+        console.log(property)
+        
+
+        if (direction === "asc") {
+            return highestSorted;
+        } else if (direction === "desc") {
+            return lowestSorted;
+        }else if (sortBy === "aToZ") {
+            return sortAtoZ;
+        } else {
+            return sortZtoA;
+        }
+        
+    }
+    
+    sort.addEventListener("change", () => {
+        grid.replaceChildren();
+
+        console.log(sort.value)
+
+        const sortedGames = sortGames(sort.value);
+
+        cardGrid(sortedGames)
+    })
+    
+}
+
+
+sortingOptions()

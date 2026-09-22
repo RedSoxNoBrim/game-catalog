@@ -33,9 +33,21 @@
         Decide on the markup and the ids/classes yourself. Think about which
         elements are the semantically correct ones before you reach for a div.
       -->
-      <input type="search" id="searchBar" name="q" placeholder="Search..."/>
+      <div id ="searchContainer">
+        <div id ="firstRow">
+          <input type="search" id="searchBar" name="q" placeholder="Search..."/>
+          <select id="sort">
+            <option value="aToZ">Sort: Title (A-Z)</option>
+            <option value="zToA">Sort: Title (Z-A)</option>
+            <option value="rating-desc">Sort: Rating (Highest)</option>
+            <option value="rating-asc">Sort: Rating (Lowest)</option>
+            <option value="year-desc">Sort: Year (Newest)</option>
+            <option value="year-asc">Sort: Year (Oldest)</option>
+          </select>
+        </div>
 
-      <p id ="Count">Currently showing 0 of 42 games.</p>
+        <p id ="Count">Currently showing 0 of 42 games.</p>
+      </div>
 
       <div id ="grid"></div>
         
