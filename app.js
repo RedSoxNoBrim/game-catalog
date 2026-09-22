@@ -150,7 +150,7 @@ const cardGrid = (games) => {
     })
 }
 
-cardGrid(GAMES);
+
 
 
 const searchBar = () => {
@@ -200,16 +200,17 @@ const sortingOptions = () => {
         
     }
     
-    sort.addEventListener("change", () => {
+    const updateGrid = () => {
         grid.replaceChildren();
-
-        console.log(sort.value)
 
         const sortedGames = sortGames(sort.value);
 
-        cardGrid(sortedGames)
-    })
-    
+        cardGrid(sortedGames);
+    }
+
+    sort.addEventListener("change", updateGrid);
+
+    updateGrid()
 }
 
 
