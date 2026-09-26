@@ -205,7 +205,7 @@ header {
 #searchContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-direction: column;
 
   background: var(--surface);
@@ -216,12 +216,27 @@ header {
 
 }
 
+.labels {
+  justify-content: center;
+  align-items: flex-start;
+  text-transform: uppercase;
+  font-size: var(--step--1);
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+}
+
+#firstRow {
+  display: flex;
+  gap: 10px;
+}
+
 #searchBar {
   flex: 1 1 240px;
   background: var(--surface-raised);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
   padding: 10px var(--space-3);
+  color: white;
 }
 
 #sort {
@@ -230,5 +245,37 @@ header {
   border-radius: var(--radius);
   padding: 10px var(--space-3);
   color: white;
+}
+
+.genreRow {
+  display: flex;
+}
+
+.chipContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.genreButtons {
+  background-color: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  padding: 5px var(--space-3);
+  font-size: var(--step--1);
+  gap: 5px;
+}
+
+.genreButtons:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.genreButtons[aria-pressed ="true"] {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
 }
 

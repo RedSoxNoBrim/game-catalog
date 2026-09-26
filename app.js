@@ -215,3 +215,97 @@ const sortingOptions = () => {
 
 
 sortingOptions()
+
+const genreFilters = () => {
+    const genreRow = document.querySelector("#genreRow")
+    const container = document.createElement("div")
+    const label = document.createElement("div")
+
+    container.classList.add("chipContainer")
+
+    label.textContent = "Genre"
+    genreRow.appendChild(label)
+    label.classList.add("labels")
+    
+    const genres = []
+    const getGenres = () => {
+        GAMES.forEach((game) => {
+            game.genres.forEach((genre) => {
+                if (!genres.includes(genre)) {
+                    genres.push(genre)
+                }
+            })
+        })
+        genres.sort();
+    }
+
+    const createButtons = () => {
+        genres.forEach((genre) => {
+            const button = document.createElement("button")
+
+            button.textContent = `${genre}`
+            button.id = genre
+            button.classList.add("genreButtons")
+            container.appendChild(button)
+        })
+
+        genreRow.appendChild(container)
+    }
+    
+    getGenres();
+    createButtons();
+
+    const getButton = document.querySelectorAll(".genreButtons")
+
+    const filterCards = () => {
+        const filteredGenres = [];
+
+        getButton.forEach((button) => {
+            if (button.getAttribute("aria-pressed") === "true") {
+                filteredGenres.push(button.id)
+                
+                
+            }
+            const filteredGrid = GAMES.filter((game) => {
+                return filteredGenres.some((genre) => game.genres.includes(genre))
+            })
+            
+            const grid = document.querySelector("#grid")
+
+            grid.replaceChildren();
+            cardGrid(filteredGrid);
+
+            console.log(filteredGenres)
+        });
+        
+        
+    }
+
+    const buttonOn = () => {
+        getButton.forEach((button) => {
+            button.addEventListener("click", () => {
+                const pressed = button.getAttribute("aria-pressed")
+
+                if (pressed === "true") {
+                    button.setAttribute("aria-pressed", "false")
+                } else {
+                    button.setAttribute("aria-pressed", "true")
+                }
+
+                filterCards();
+
+            });
+        });
+    };
+
+    buttonOn();
+    
+    
+
+    
+
+    
+
+}
+
+genreFilters();
