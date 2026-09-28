@@ -270,6 +270,8 @@ const genreFilters = () => {
                 return filteredGenres.some((genre) => game.genres.includes(genre))
             })
             
+            
+            
             const grid = document.querySelector("#grid")
 
             grid.replaceChildren();
@@ -277,7 +279,12 @@ const genreFilters = () => {
 
             console.log(filteredGenres)
         });
+        const activeFilters = document.querySelectorAll('.genreButtons[aria-pressed="true"]')
         
+        if (activeFilters.length === 0) {
+            grid.replaceChildren();
+            sortingOptions()
+        }
         
     }
 
