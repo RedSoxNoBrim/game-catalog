@@ -316,3 +316,96 @@ const genreFilters = () => {
 }
 
 genreFilters();
+
+const platformFilters = () => {
+    const platformRow = document.querySelector("#platformRow")
+    const container = document.createElement("div")
+    const label = document.createElement("div")
+
+    container.classList.add("chipContainer")
+
+    label.textContent = "Platform"
+    platformRow.appendChild(label)
+    label.classList.add("labels")
+
+    const platforms = [];
+    const getPlatforms = () => {
+        GAMES.forEach((game) => {
+            game.platforms.forEach((platform) => {
+                if (!platforms.includes(platform)) {
+                    platforms.push(platform)
+                }
+            })
+        })
+    }
+
+    const createButtons = () => {
+        platforms.forEach((platform) => {
+            const button = document.createElement("button")
+
+            button.textContent = `${platform}`
+            button.id = platform
+            button.classList.add("platformButtons")
+            container.appendChild(button)
+        })
+
+        platformRow.appendChild(container)
+    }
+
+    getPlatforms()
+    createButtons()
+    
+    const getButton = document.querySelectorAll(".platformButtons")
+
+    const filterCards = () => {
+        const filteredPlatforms = [];
+
+        getButton.forEach((button) => {
+            if (button.getAttribute("aria-pressed") === "true") {
+                filteredPlatforms.push(button.id)
+                
+                
+            }
+            const filteredGrid = GAMES.filter((game) => {
+                return filteredPlatforms.some((platform) => game.platforms.includes(platform))
+            })
+            
+            
+            
+            const grid = document.querySelector("#grid")
+
+            grid.replaceChildren();
+            cardGrid(filteredGrid);
+
+            console.log(filteredPlatforms)
+        });
+        const activeFilters = document.querySelectorAll('.platformButtons[aria-pressed="true"]')
+        
+        if (activeFilters.length === 0) {
+            grid.replaceChildren();
+            sortingOptions()
+        }
+        
+    }
+
+    const buttonOn = () => {
+        getButton.forEach((button) => {
+            button.addEventListener("click", () => {
+                const pressed = button.getAttribute("aria-pressed")
+
+                if (pressed === "true") {
+                    button.setAttribute("aria-pressed", "false")
+                } else {
+                    button.setAttribute("aria-pressed", "true")
+                }
+
+                filterCards();
+
+            });
+        });
+    };
+
+    buttonOn();
+}
+
+platformFilters();

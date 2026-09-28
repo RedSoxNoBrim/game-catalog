@@ -18,7 +18,7 @@ question is ready to ask at the next call instead of losing you an evening.
 - [x] **4. It matches the design** — grid, cards, colours and spacing, all from `tokens.css`
 - [x] **5. Search box** — case-insensitive, matches anywhere in the title
 - [X] **6. Sorting** — six options, and `GAMES` is never mutated
-- [ ] **7. Genre filters** — the list is built from the data, not typed out
+- [X] **7. Genre filters** — the list is built from the data, not typed out
 - [ ] **8. Platform filters** — same again
 - [ ] **9. Everything works together** — search + both filters + sort, all at once
 - [ ] **10. The count and the empty state**
