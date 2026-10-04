@@ -203,6 +203,12 @@ const updateGrid = () => {
 
     grid.replaceChildren();
     cardGrid(filteredGames);
+
+    const count = document.querySelector("#count")
+
+    let countNumber = filteredGames.length
+
+    count.textContent = `Currently showing ${countNumber} of 42 games`
 }
             
 
