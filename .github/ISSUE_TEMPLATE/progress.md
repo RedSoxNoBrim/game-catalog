@@ -19,8 +19,8 @@ question is ready to ask at the next call instead of losing you an evening.
 - [x] **5. Search box** — case-insensitive, matches anywhere in the title
 - [X] **6. Sorting** — six options, and `GAMES` is never mutated
 - [X] **7. Genre filters** — the list is built from the data, not typed out
-- [ ] **8. Platform filters** — same again
-- [ ] **9. Everything works together** — search + both filters + sort, all at once
+- [X] **8. Platform filters** — same again
+- [X] **9. Everything works together** — search + both filters + sort, all at once
 - [ ] **10. The count and the empty state**
 - [ ] **11. Checked at phone width** — on a real phone, no sideways scrolling
 - [ ] **12. Finished** — your own README, screenshot, live link, no dead code

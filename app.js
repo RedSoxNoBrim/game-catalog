@@ -204,12 +204,66 @@ const updateGrid = () => {
     grid.replaceChildren();
     cardGrid(filteredGames);
 
-    const count = document.querySelector("#count")
+
+    const resetFilters = () => {
+        const filterButton = document.querySelector(".clearFilters")
+        
+
+        
+
+        filterButton.addEventListener("click", () => {
+            const Filters = document.querySelectorAll("button")
+            const sort = document.querySelector("#sort")
+            const searchInput = document.querySelector("#searchBar")
+            
+            searchInput.value = ""
+            sort.value = "aToZ";
+
+            Filters.forEach((button) => {
+                button.setAttribute("aria-pressed", "false")
+            })
+
+            updateGrid();
+        })
+    }
+    resetFilters();
+
 
     let countNumber = filteredGames.length
+    
+    const count = document.querySelector("#count")
+    
+    count.innerHTML = `Currently showing <span class="game-count">${filteredGames.length}</span> of <span class="game-count">${GAMES.length}</span> games`
+    
+    
 
-    count.textContent = `Currently showing ${countNumber} of 42 games`
+    const emptyState = () => {
+        const div = document.createElement("div")
+        const header = document.createElement("h2")
+        const p = document.createElement("p")
+        const button = document.createElement("button")
+        
+
+        header.classList.add("emptyHeader")
+        p.classList.add("emptyText")
+        button.classList.add("clearFilters")
+
+        if (countNumber === 0) {
+            header.textContent = "No games match those filters"
+            p.textContent = "Try removing a genre, or widening the platform list"
+            button.textContent = "Clear all filters"
+
+            div.appendChild(header)
+            div.appendChild(p)
+            div.appendChild(button)
+
+            grid.appendChild(div)
+        }
+    }
+    emptyState();
+        
 }
+
             
 
 
@@ -383,3 +437,4 @@ platformFilters();
 searchBar();
 sortingOptions();
 updateGrid();
+
