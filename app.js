@@ -212,14 +212,14 @@ const updateGrid = () => {
         
 
         filterButton.addEventListener("click", () => {
-            const Filters = document.querySelectorAll("button")
+            const filters = document.querySelectorAll("button")
             const sort = document.querySelector("#sort")
             const searchInput = document.querySelector("#searchBar")
             
             searchInput.value = ""
             sort.value = "aToZ";
 
-            Filters.forEach((button) => {
+            filters.forEach((button) => {
                 button.setAttribute("aria-pressed", "false")
             })
 
@@ -233,7 +233,7 @@ const updateGrid = () => {
     
     const count = document.querySelector("#count")
     
-    count.innerHTML = `Currently showing <span class="game-count">${filteredGames.length}</span> of <span class="game-count">${GAMES.length}</span> games`
+    count.innerHTML = `Currently showing <span class="game-count">${countNumber}</span> of <span class="game-count">${GAMES.length}</span> games`
     
     
 
@@ -246,7 +246,8 @@ const updateGrid = () => {
 
         header.classList.add("emptyHeader")
         p.classList.add("emptyText")
-        button.classList.add("clearFilters")
+        button.classList.add("emptyButton")
+        div.classList.add("emptyContainer")
 
         if (countNumber === 0) {
             header.textContent = "No games match those filters"
@@ -258,7 +259,24 @@ const updateGrid = () => {
             div.appendChild(button)
 
             grid.appendChild(div)
+
+            button.addEventListener("click", () => {
+                const filters = document.querySelectorAll("button")
+                const sort = document.querySelector("#sort")
+                const searchInput = document.querySelector("#searchBar")
+            
+                searchInput.value = ""
+                sort.selectedIndex = 0;
+
+                filters.forEach((button) => {
+                    button.setAttribute("aria-pressed", "false")
+                })
+
+                updateGrid();
+            })
         }
+
+        
     }
     emptyState();
         

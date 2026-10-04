@@ -335,3 +335,29 @@ header {
   color: var(--accent-ink);
   font-weight: 600;
 }
+
+.emptyContainer { 
+  width: 100%;
+  text-align: center;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7) var(--space-5);
+ 
+}
+
+.emptyHeader {
+  font-size: var(--step-2);
+}
+
+.emptyText {
+  color: var(--text-muted)
+}
+
+.emptyButton {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  padding: var(--space-2) var(--space-4);
+}
