@@ -150,71 +150,111 @@ const cardGrid = (games) => {
     })
 }
 
+const updateGrid = () => {
+    let filteredGames = GAMES;
+
+    const search = document.querySelector("#searchBar");
+
+    if (search.value) {
+        filteredGames = filteredGames.filter((game) => {
+            return game.title.toLowerCase().includes(search.value.toLowerCase());
+        })
+    }
+
+    let filteredGenres = [];
+
+    const genreButtons = document.querySelectorAll(".genreButtons")
+
+    genreButtons.forEach((button) => {
+        if (button.getAttribute("aria-pressed") === "true") {
+            filteredGenres.push(button.id)
+        }
+    })
+
+    if (filteredGenres.length > 0) {
+        filteredGames = filteredGames.filter((game) => {
+            return filteredGenres.some((genre) => {
+                return game.genres.includes(genre)
+            })
+        })
+    }
+
+    let filteredPlatforms = [];
+
+    const platformButtons = document.querySelectorAll(".platformButtons")
+
+    platformButtons.forEach((button) => {
+        if (button.getAttribute("aria-pressed") === "true") {
+            filteredPlatforms.push(button.id)
+        }
+    })
+
+    if (filteredPlatforms.length > 0) {
+        filteredGames = filteredGames.filter((game) => {
+            return filteredPlatforms.some((platform) => {
+                return game.platforms.includes(platform)
+            })
+        })
+    }
+
+    const sort = document.querySelector("#sort");
+
+    filteredGames = sortGames(sort.value, filteredGames);
+
+    grid.replaceChildren();
+    cardGrid(filteredGames);
+}
+            
+
 
 
 
 const searchBar = () => {
     const search = document.querySelector("#searchBar")
-    const grid = document.querySelector("#grid")
+    
 
     search.addEventListener("input", () => {
-        console.log("Yea you searchin")
-        grid.replaceChildren();
-        const filteredGames = GAMES.filter((game) => game.title.toLowerCase().includes(search.value.toLowerCase()))
-        console.log(filteredGames)
-        cardGrid(filteredGames);
-        
+        updateGrid()
     })
 }
 
 
-searchBar();
 
+
+const sortGames = (sortBy, games) => {
+    const [property, direction] = sortBy.split("-");
+        
+    const highestSorted = games.toSorted((a,b) => a[property] - b[property]);
+    const lowestSorted = games.toSorted((a,b) => b[property] - a[property]);
+    const sortAtoZ = games.toSorted((a,b) => a.title.localeCompare(b.title));
+    const sortZtoA = games.toSorted((a,b) => b.title.localeCompare(a.title));
+
+
+    console.log(property)
+        
+
+    if (direction === "asc") {
+        return highestSorted;
+    } else if (direction === "desc") {
+        return lowestSorted;
+    }else if (sortBy === "aToZ") {
+        return sortAtoZ;
+    } else {
+        return sortZtoA;
+    }
+}
 
 const sortingOptions = () => {
-    const grid = document.querySelector("#grid")
     const sort = document.querySelector("#sort")
-            
 
-    const sortGames = (sortBy) => {
-        const [property, direction] = sortBy.split("-");
-        
-        const highestSorted = GAMES.toSorted((a,b) => a[property] - b[property]);
-        const lowestSorted = GAMES.toSorted((a,b) => b[property] - a[property]);
-        const sortAtoZ = GAMES.toSorted((a,b) => a.title.localeCompare(b.title));
-        const sortZtoA = GAMES.toSorted((a,b) => b.title.localeCompare(a.title));
-
-
-        console.log(property)
-        
-
-        if (direction === "asc") {
-            return highestSorted;
-        } else if (direction === "desc") {
-            return lowestSorted;
-        }else if (sortBy === "aToZ") {
-            return sortAtoZ;
-        } else {
-            return sortZtoA;
-        }
-        
-    }
-    
-    const updateGrid = () => {
-        grid.replaceChildren();
-
-        const sortedGames = sortGames(sort.value);
-
-        cardGrid(sortedGames);
-    }
-
-    sort.addEventListener("change", updateGrid);
-
-    updateGrid()
+    sort.addEventListener("change", () => {
+        updateGrid();
+    })
 }
 
 
-sortingOptions()
+
+
 
 const genreFilters = () => {
     const genreRow = document.querySelector("#genreRow")
@@ -256,66 +296,24 @@ const genreFilters = () => {
     createButtons();
 
     const getButton = document.querySelectorAll(".genreButtons")
+    
+    getButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            const pressed = button.getAttribute("aria-pressed")
 
-    const filterCards = () => {
-        const filteredGenres = [];
-
-        getButton.forEach((button) => {
-            if (button.getAttribute("aria-pressed") === "true") {
-                filteredGenres.push(button.id)
-                
-                
+            if (pressed === "true") {
+                button.setAttribute("aria-pressed", "false")
+            } else {
+                button.setAttribute("aria-pressed", "true")
             }
-            const filteredGrid = GAMES.filter((game) => {
-                return filteredGenres.some((genre) => game.genres.includes(genre))
-            })
-            
-            
-            
-            const grid = document.querySelector("#grid")
 
-            grid.replaceChildren();
-            cardGrid(filteredGrid);
+            updateGrid();
 
-            console.log(filteredGenres)
         });
-        const activeFilters = document.querySelectorAll('.genreButtons[aria-pressed="true"]')
-        
-        if (activeFilters.length === 0) {
-            grid.replaceChildren();
-            sortingOptions()
-        }
-        
-    }
-
-    const buttonOn = () => {
-        getButton.forEach((button) => {
-            button.addEventListener("click", () => {
-                const pressed = button.getAttribute("aria-pressed")
-
-                if (pressed === "true") {
-                    button.setAttribute("aria-pressed", "false")
-                } else {
-                    button.setAttribute("aria-pressed", "true")
-                }
-
-                filterCards();
-
-            });
-        });
-    };
-
-    buttonOn();
-    
-    
-
-    
-
-    
-
+    });
 }
 
-genreFilters();
+
 
 const platformFilters = () => {
     const platformRow = document.querySelector("#platformRow")
@@ -357,55 +355,25 @@ const platformFilters = () => {
     
     const getButton = document.querySelectorAll(".platformButtons")
 
-    const filterCards = () => {
-        const filteredPlatforms = [];
+    getButton.forEach((button) => {
+        button.addEventListener("click", () => {
+            const pressed = button.getAttribute("aria-pressed")
 
-        getButton.forEach((button) => {
-            if (button.getAttribute("aria-pressed") === "true") {
-                filteredPlatforms.push(button.id)
-                
-                
+            if (pressed === "true") {
+                button.setAttribute("aria-pressed", "false")
+            } else {
+                button.setAttribute("aria-pressed", "true")
             }
-            const filteredGrid = GAMES.filter((game) => {
-                return filteredPlatforms.some((platform) => game.platforms.includes(platform))
-            })
-            
-            
-            
-            const grid = document.querySelector("#grid")
 
-            grid.replaceChildren();
-            cardGrid(filteredGrid);
-
-            console.log(filteredPlatforms)
+            updateGrid();
         });
-        const activeFilters = document.querySelectorAll('.platformButtons[aria-pressed="true"]')
-        
-        if (activeFilters.length === 0) {
-            grid.replaceChildren();
-            sortingOptions()
-        }
-        
-    }
-
-    const buttonOn = () => {
-        getButton.forEach((button) => {
-            button.addEventListener("click", () => {
-                const pressed = button.getAttribute("aria-pressed")
-
-                if (pressed === "true") {
-                    button.setAttribute("aria-pressed", "false")
-                } else {
-                    button.setAttribute("aria-pressed", "true")
-                }
-
-                filterCards();
-
-            });
-        });
-    };
-
-    buttonOn();
+    });
 }
 
+
+
+genreFilters();
 platformFilters();
+searchBar();
+sortingOptions();
+updateGrid();
