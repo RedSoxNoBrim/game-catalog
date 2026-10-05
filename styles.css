@@ -51,7 +51,7 @@ img {
 
 /* Your styles start here. */
 
-main {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,10 +68,30 @@ main {
 
 header { 
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+
+  width: 100%;
+  align-items: flex-start;
 }
+
+#title {
+  font-size: var(--step-3);
+  letter-spacing: -0.02em;
+}
+
+#game {
+  color: var(--text);
+}
+
+#shelf {
+  color: var(--accent);
+}
+
+#tagline {
+  font-size: var(--step-0);
+  color: var(--text-muted);
+}
+
 
 #countContainer {
   display: flex;
