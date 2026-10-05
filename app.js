@@ -132,11 +132,14 @@ const cardGrid = (games) => {
 
                     genres.textContent = `${genre}`;
                     genreContainer.appendChild(genres);
-                    body.appendChild(genreContainer);
+                    
                 })
             } else if (key === "blurb") {
                     body.appendChild(p) 
-            }
+                    body.appendChild(genreContainer);
+            } 
+            
+            
 
             
         
@@ -217,7 +220,7 @@ const updateGrid = () => {
             const searchInput = document.querySelector("#searchBar")
             
             searchInput.value = ""
-            sort.value = "aToZ";
+            sort.selectedIndex = 0;
 
             filters.forEach((button) => {
                 button.setAttribute("aria-pressed", "false")

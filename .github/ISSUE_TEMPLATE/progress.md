@@ -21,8 +21,8 @@ question is ready to ask at the next call instead of losing you an evening.
 - [X] **7. Genre filters** — the list is built from the data, not typed out
 - [X] **8. Platform filters** — same again
 - [X] **9. Everything works together** — search + both filters + sort, all at once
-- [ ] **10. The count and the empty state**
-- [ ] **11. Checked at phone width** — on a real phone, no sideways scrolling
+- [X] **10. The count and the empty state**
+- [X] **11. Checked at phone width** — on a real phone, no sideways scrolling
 - [ ] **12. Finished** — your own README, screenshot, live link, no dead code
 
 ## Before you call it done
