@@ -12,31 +12,31 @@ question is ready to ask at the next call instead of losing you an evening.
 
 ## The steps
 
-- [X] **1. One card on the screen** — built in JavaScript from `GAMES[0]`, not typed into the HTML
-- [x] **2. All forty-two on the screen** — one ugly column is the correct result here
-- [X] **3. Live on GitHub Pages** — paste the URL in a comment below, and put it in the repo description 
-- [x] **4. It matches the design** — grid, cards, colours and spacing, all from `tokens.css`
-- [x] **5. Search box** — case-insensitive, matches anywhere in the title
-- [X] **6. Sorting** — six options, and `GAMES` is never mutated
-- [X] **7. Genre filters** — the list is built from the data, not typed out
-- [X] **8. Platform filters** — same again
-- [X] **9. Everything works together** — search + both filters + sort, all at once
-- [X] **10. The count and the empty state**
-- [X] **11. Checked at phone width** — on a real phone, no sideways scrolling
-- [ ] **12. Finished** — your own README, screenshot, live link, no dead code
+- [] **1. One card on the screen** — built in JavaScript from `GAMES[0]`, not typed into the HTML
+- [] **2. All forty-two on the screen** — one ugly column is the correct result here
+- [] **3. Live on GitHub Pages** — paste the URL in a comment below, and put it in the repo description 
+- [] **4. It matches the design** — grid, cards, colours and spacing, all from `tokens.css`
+- [] **5. Search box** — case-insensitive, matches anywhere in the title
+- [] **6. Sorting** — six options, and `GAMES` is never mutated
+- [] **7. Genre filters** — the list is built from the data, not typed out
+- [] **8. Platform filters** — same again
+- [] **9. Everything works together** — search + both filters + sort, all at once
+- [] **10. The count and the empty state**
+- [] **11. Checked at phone width** — on a real phone, no sideways scrolling
+- [] **12. Finished** — your own README, screenshot, live link, no dead code
 
 ## Before you call it done
 
-- [X] Nothing hard-coded in the HTML — all 42 cards come from the array
-- [X] Every colour and spacing value comes from `tokens.css`, no raw hex codes in my CSS
-- [X] Sorting never mutates `GAMES` (check `GAMES[0].title` before and after)
-- [X] Both filter lists are derived from the data
-- [X] A live "showing X of Y" count
-- [X] The empty state, with a way to clear the filters
-- [ ] Keyboard focus is visible everywhere I can tab to
-- [X] No libraries, no `fetch`, no Grid, no media queries
-- [X] Pushed as I went — a dozen or so meaningful commits, not one called "done"
-- [X] No leftover `console.log` calls, no commented-out dead code
+- [] Nothing hard-coded in the HTML — all 42 cards come from the array
+- [] Every colour and spacing value comes from `tokens.css`, no raw hex codes in my CSS
+- [] Sorting never mutates `GAMES` (check `GAMES[0].title` before and after)
+- [] Both filter lists are derived from the data
+- [] A live "showing X of Y" count
+- [] The empty state, with a way to clear the filters
+- [] Keyboard focus is visible everywhere I can tab to
+- [] No libraries, no `fetch`, no Grid, no media queries
+- [] Pushed as I went — a dozen or so meaningful commits, not one called "done"
+- [] No leftover `console.log` calls, no commented-out dead code
 
 ## Notes to self
 
