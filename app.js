@@ -20,9 +20,12 @@
  * Delete the line below once you have seen it work.
  */
 
-console.log(`GameShelf loaded ${GAMES.length} games. Here is the first one:`, GAMES[0]);
-
 const grid = document.querySelector("#grid");
+
+let searchText = "";
+let selectedGenres = [];
+let selectedPlatforms = [];
+let sortBy = "aToZ";
 
 const firstCard = () => {
     const cards = document.createElement("div");
@@ -138,13 +141,6 @@ const cardGrid = (games) => {
                     body.appendChild(p) 
                     body.appendChild(genreContainer);
             } 
-            
-            
-
-            
-        
-        
-        
         })
         card.appendChild(body);
         card.appendChild(footer);
@@ -156,59 +152,87 @@ const cardGrid = (games) => {
 const updateGrid = () => {
     let filteredGames = GAMES;
 
-    const search = document.querySelector("#searchBar");
-
-    if (search.value) {
+    if (searchText) {
         filteredGames = filteredGames.filter((game) => {
-            return game.title.toLowerCase().includes(search.value.toLowerCase());
+            return game.title.toLowerCase().includes(searchText);
         })
     }
 
-    let filteredGenres = [];
-
-    const genreButtons = document.querySelectorAll(".genreButtons")
-
-    genreButtons.forEach((button) => {
-        if (button.getAttribute("aria-pressed") === "true") {
-            filteredGenres.push(button.id)
-        }
-    })
-
-    if (filteredGenres.length > 0) {
+    if (selectedGenres.length > 0) {
         filteredGames = filteredGames.filter((game) => {
-            return filteredGenres.some((genre) => {
-                return game.genres.includes(genre)
-            })
-        })
-    }
+            return selectedGenres.some((genre) => {
+                return game.genres.includes(genre);
+            });
+        });
+    };
 
-    let filteredPlatforms = [];
-
-    const platformButtons = document.querySelectorAll(".platformButtons")
-
-    platformButtons.forEach((button) => {
-        if (button.getAttribute("aria-pressed") === "true") {
-            filteredPlatforms.push(button.id)
-        }
-    })
-
-    if (filteredPlatforms.length > 0) {
+    if (selectedPlatforms.length > 0) {
         filteredGames = filteredGames.filter((game) => {
-            return filteredPlatforms.some((platform) => {
-                return game.platforms.includes(platform)
-            })
-        })
-    }
+            return selectedPlatforms.some((platform) => {
+                return game.platforms.includes(platform);
+            });
+        });
+    };
 
-    const sort = document.querySelector("#sort");
-
-    filteredGames = sortGames(sort.value, filteredGames);
+    filteredGames = sortGames(sortBy, filteredGames);
 
     grid.replaceChildren();
     cardGrid(filteredGames);
 
+    let countNumber = filteredGames.length;
+    
+    const count = document.querySelector("#count");
+    
+    count.innerHTML = `Currently showing <span class="game-count">${countNumber}</span> of <span class="game-count">${GAMES.length}</span> games`
+    
+    const emptyState = () => {
+        const div = document.createElement("div");
+        const header = document.createElement("h2");
+        const p = document.createElement("p");
+        const button = document.createElement("button");
+        
 
-    const resetFilters = () => {
+        header.classList.add("emptyHeader");
+        p.classList.add("emptyText");
+        button.classList.add("emptyButton");
+        div.classList.add("emptyContainer");
+
+        if (countNumber === 0) {
+            header.textContent = "No games match those filters";
+            p.textContent = "Try removing a genre, or widening the platform list";
+            button.textContent = "Clear all filters";
+
+            div.appendChild(header);
+            div.appendChild(p);
+            div.appendChild(button);
+
+            grid.appendChild(div);
+
+            button.addEventListener("click", () => {
+                const filters = document.querySelectorAll("button");
+                let sort = document.querySelector("#sort");
+                let searchInput = document.querySelector("#searchBar");
+            
+                searchText = "";
+                sortBy = "aToZ";
+                selectedGenres = [];
+                selectedPlatforms = [];
+
+                searchInput.value = "";
+                sort.value = sortBy;
+
+                filters.forEach((button) => {
+                    button.setAttribute("aria-pressed", "false");
+                })
+
+                updateGrid();
+            })
+        }
+    }
+    emptyState();
+}
+
+const resetFilters = () => {
         const filterButton = document.querySelector(".clearFilters")
         
 
@@ -216,91 +240,34 @@ const updateGrid = () => {
 
         filterButton.addEventListener("click", () => {
             const filters = document.querySelectorAll("button")
-            const sort = document.querySelector("#sort")
-            const searchInput = document.querySelector("#searchBar")
+            let sort = document.querySelector("#sort")
+            let searchInput = document.querySelector("#searchBar")
             
-            searchInput.value = ""
-            sort.selectedIndex = 0;
+            searchText = "";
+            sortBy = "aToZ";
+            selectedGenres = [];
+            selectedPlatforms = [];
+
+            searchInput.value = "";
+            sort.value = sortBy;
 
             filters.forEach((button) => {
-                button.setAttribute("aria-pressed", "false")
-            })
+                button.setAttribute("aria-pressed", "false");
+            });
 
             updateGrid();
-        })
-    }
-    resetFilters();
-
-
-    let countNumber = filteredGames.length
-    
-    const count = document.querySelector("#count")
-    
-    count.innerHTML = `Currently showing <span class="game-count">${countNumber}</span> of <span class="game-count">${GAMES.length}</span> games`
-    
-    
-
-    const emptyState = () => {
-        const div = document.createElement("div")
-        const header = document.createElement("h2")
-        const p = document.createElement("p")
-        const button = document.createElement("button")
-        
-
-        header.classList.add("emptyHeader")
-        p.classList.add("emptyText")
-        button.classList.add("emptyButton")
-        div.classList.add("emptyContainer")
-
-        if (countNumber === 0) {
-            header.textContent = "No games match those filters"
-            p.textContent = "Try removing a genre, or widening the platform list"
-            button.textContent = "Clear all filters"
-
-            div.appendChild(header)
-            div.appendChild(p)
-            div.appendChild(button)
-
-            grid.appendChild(div)
-
-            button.addEventListener("click", () => {
-                const filters = document.querySelectorAll("button")
-                const sort = document.querySelector("#sort")
-                const searchInput = document.querySelector("#searchBar")
-            
-                searchInput.value = ""
-                sort.selectedIndex = 0;
-
-                filters.forEach((button) => {
-                    button.setAttribute("aria-pressed", "false")
-                })
-
-                updateGrid();
-            })
-        }
-
-        
-    }
-    emptyState();
-        
-}
-
-            
-
-
-
+        });
+};
 
 const searchBar = () => {
     const search = document.querySelector("#searchBar")
     
 
     search.addEventListener("input", () => {
+        searchText = search.value.toLowerCase();
         updateGrid()
     })
 }
-
-
-
 
 const sortGames = (sortBy, games) => {
     const [property, direction] = sortBy.split("-");
@@ -311,7 +278,7 @@ const sortGames = (sortBy, games) => {
     const sortZtoA = games.toSorted((a,b) => b.title.localeCompare(a.title));
 
 
-    console.log(property)
+    /*console.log(property) */
         
 
     if (direction === "asc") {
@@ -329,63 +296,68 @@ const sortingOptions = () => {
     const sort = document.querySelector("#sort")
 
     sort.addEventListener("change", () => {
+        sortBy = sort.value;
+        console.log(sortBy)
         updateGrid();
     })
 }
 
-
-
-
-
+const createFilterChips = (sortBy) => {
+}
 const genreFilters = () => {
-    const genreRow = document.querySelector("#genreRow")
-    const container = document.createElement("div")
-    const label = document.createElement("div")
+    const genreRow = document.querySelector("#genreRow");
+    const container = document.createElement("div");
+    const label = document.createElement("div");
 
-    container.classList.add("chipContainer")
+    container.classList.add("chipContainer");
 
-    label.textContent = "Genre"
-    genreRow.appendChild(label)
-    label.classList.add("labels")
+    label.textContent = "Genre";
+    genreRow.appendChild(label);
+    label.classList.add("labels");
     
-    const genres = []
+    const genres = [];
     const getGenres = () => {
         GAMES.forEach((game) => {
             game.genres.forEach((genre) => {
                 if (!genres.includes(genre)) {
-                    genres.push(genre)
-                }
-            })
-        })
+                    genres.push(genre);
+                };
+            });
+        });
         genres.sort();
-    }
+    };
 
     const createButtons = () => {
         genres.forEach((genre) => {
-            const button = document.createElement("button")
+            const button = document.createElement("button");
 
-            button.textContent = `${genre}`
-            button.id = genre
-            button.classList.add("genreButtons")
-            container.appendChild(button)
+            button.textContent = `${genre}`;
+            button.id = genre;
+            button.setAttribute("aria-pressed", "false");
+            button.classList.add("genreButtons");
+            container.appendChild(button);
         })
 
-        genreRow.appendChild(container)
-    }
+        genreRow.appendChild(container);
+    };
     
     getGenres();
     createButtons();
 
-    const getButton = document.querySelectorAll(".genreButtons")
+    const getButton = document.querySelectorAll(".genreButtons");
     
     getButton.forEach((button) => {
         button.addEventListener("click", () => {
-            const pressed = button.getAttribute("aria-pressed")
-
-            if (pressed === "true") {
-                button.setAttribute("aria-pressed", "false")
+            const pressed = button.getAttribute("aria-pressed");
+            
+            if (pressed === "false") {
+                button.setAttribute("aria-pressed", "true");
+                selectedGenres.push(button.id);
+                console.log(selectedGenres);
             } else {
-                button.setAttribute("aria-pressed", "true")
+                button.setAttribute("aria-pressed", "false");
+                selectedGenres = selectedGenres.filter((genre) => genre !== button.id);
+                console.log(selectedGenres)
             }
 
             updateGrid();
@@ -393,8 +365,6 @@ const genreFilters = () => {
         });
     });
 }
-
-
 
 const platformFilters = () => {
     const platformRow = document.querySelector("#platformRow")
@@ -424,6 +394,7 @@ const platformFilters = () => {
 
             button.textContent = `${platform}`
             button.id = platform
+            button.setAttribute("aria-pressed", "false")
             button.classList.add("platformButtons")
             container.appendChild(button)
         })
@@ -440,10 +411,14 @@ const platformFilters = () => {
         button.addEventListener("click", () => {
             const pressed = button.getAttribute("aria-pressed")
 
-            if (pressed === "true") {
-                button.setAttribute("aria-pressed", "false")
+            if (pressed === "false") {
+                button.setAttribute("aria-pressed", "true");
+                selectedPlatforms.push(button.id);
+                console.log(selectedPlatforms)
             } else {
-                button.setAttribute("aria-pressed", "true")
+                button.setAttribute("aria-pressed", "false");
+                selectedPlatforms = selectedPlatforms.filter((platform) => platform !== button.id)
+                console.log(selectedPlatforms)
             }
 
             updateGrid();
@@ -451,8 +426,7 @@ const platformFilters = () => {
     });
 }
 
-
-
+resetFilters();
 genreFilters();
 platformFilters();
 searchBar();
