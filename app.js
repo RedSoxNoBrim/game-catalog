@@ -149,6 +149,26 @@ const cardGrid = (games) => {
     })
 }
 
+const resetGrid = () => {
+    const filters = document.querySelectorAll("button");
+    let sort = document.querySelector("#sort");
+    let searchInput = document.querySelector("#searchBar");
+            
+    searchText = "";
+    sortBy = "aToZ";
+    selectedGenres = [];
+    selectedPlatforms = [];
+
+    searchInput.value = "";
+    sort.value = sortBy;
+
+    filters.forEach((button) => {
+        button.setAttribute("aria-pressed", "false");
+    })
+
+    updateGrid();
+}
+
 const updateGrid = () => {
     let filteredGames = GAMES;
 
@@ -209,23 +229,7 @@ const updateGrid = () => {
             grid.appendChild(div);
 
             button.addEventListener("click", () => {
-                const filters = document.querySelectorAll("button");
-                let sort = document.querySelector("#sort");
-                let searchInput = document.querySelector("#searchBar");
-            
-                searchText = "";
-                sortBy = "aToZ";
-                selectedGenres = [];
-                selectedPlatforms = [];
-
-                searchInput.value = "";
-                sort.value = sortBy;
-
-                filters.forEach((button) => {
-                    button.setAttribute("aria-pressed", "false");
-                })
-
-                updateGrid();
+                resetGrid();
             })
         }
     }
@@ -239,23 +243,7 @@ const resetFilters = () => {
         
 
         filterButton.addEventListener("click", () => {
-            const filters = document.querySelectorAll("button")
-            let sort = document.querySelector("#sort")
-            let searchInput = document.querySelector("#searchBar")
-            
-            searchText = "";
-            sortBy = "aToZ";
-            selectedGenres = [];
-            selectedPlatforms = [];
-
-            searchInput.value = "";
-            sort.value = sortBy;
-
-            filters.forEach((button) => {
-                button.setAttribute("aria-pressed", "false");
-            });
-
-            updateGrid();
+            resetGrid();
         });
 };
 
@@ -302,47 +290,56 @@ const sortingOptions = () => {
     })
 }
 
-const createFilterChips = (sortBy) => {
-}
-const genreFilters = () => {
-    const genreRow = document.querySelector("#genreRow");
+const createFilterOptions = (sortBy) => {
+    const row = document.querySelector(`#${sortBy}Row`);
     const container = document.createElement("div");
     const label = document.createElement("div");
 
     container.classList.add("chipContainer");
 
-    label.textContent = "Genre";
-    genreRow.appendChild(label);
+    label.textContent = `${sortBy}`;
+    row.appendChild(label);
     label.classList.add("labels");
-    
-    const genres = [];
-    const getGenres = () => {
+
+    const getFilters = () => {
+        const filters = [];
+
         GAMES.forEach((game) => {
-            game.genres.forEach((genre) => {
-                if (!genres.includes(genre)) {
-                    genres.push(genre);
+            game[`${sortBy}s`].forEach((filter) => {
+                if (!filters.includes(filter)) {
+                    filters.push(filter)
                 };
             });
         });
-        genres.sort();
+        
+        if (sortBy === "genre") {
+            filters.sort();
+        };
+
+        return filters;
     };
 
     const createButtons = () => {
-        genres.forEach((genre) => {
+        const filters = getFilters();
+
+        filters.forEach((filter) => {
             const button = document.createElement("button");
 
-            button.textContent = `${genre}`;
-            button.id = genre;
+            button.textContent = `${filter}`;
+            button.id = filter;
             button.setAttribute("aria-pressed", "false");
-            button.classList.add("genreButtons");
+            button.classList.add(`${sortBy}Buttons`);
             container.appendChild(button);
-        })
+        });
 
-        genreRow.appendChild(container);
+        row.appendChild(container);
     };
-    
-    getGenres();
     createButtons();
+
+}
+
+const genreFilters = () => {
+    createFilterOptions("genre")
 
     const getButton = document.querySelectorAll(".genreButtons");
     
@@ -367,43 +364,7 @@ const genreFilters = () => {
 }
 
 const platformFilters = () => {
-    const platformRow = document.querySelector("#platformRow")
-    const container = document.createElement("div")
-    const label = document.createElement("div")
-
-    container.classList.add("chipContainer")
-
-    label.textContent = "Platform"
-    platformRow.appendChild(label)
-    label.classList.add("labels")
-
-    const platforms = [];
-    const getPlatforms = () => {
-        GAMES.forEach((game) => {
-            game.platforms.forEach((platform) => {
-                if (!platforms.includes(platform)) {
-                    platforms.push(platform)
-                }
-            })
-        })
-    }
-
-    const createButtons = () => {
-        platforms.forEach((platform) => {
-            const button = document.createElement("button")
-
-            button.textContent = `${platform}`
-            button.id = platform
-            button.setAttribute("aria-pressed", "false")
-            button.classList.add("platformButtons")
-            container.appendChild(button)
-        })
-
-        platformRow.appendChild(container)
-    }
-
-    getPlatforms()
-    createButtons()
+    createFilterOptions("platform");
     
     const getButton = document.querySelectorAll(".platformButtons")
 
