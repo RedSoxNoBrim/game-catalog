@@ -181,14 +181,13 @@ header {
   
   color: var(--accent);
   background-color: rgba(10,12,16,0.78);
-  padding: 5px 10px;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: var(--step--1);
   z-index: 1;
   align-self: flex-start;
-  margin-right: 15px;
-  
+  margin-right: var(--space-4);
   
 }
 
@@ -200,7 +199,7 @@ header {
   text-shadow: 1px 1px 2px black;
   z-index: 1;
   align-self: flex-end;
-  margin-left: 15px;
+  margin-left: var(--space-4);
 
 }
 
@@ -232,16 +231,16 @@ header {
   letter-spacing: 0.04em;
   color: var(--text-muted);
   border-radius: var(--radius-pill);
-  padding: 2px 5px;
+  padding: var(--space-1) var(--space-2);
 }
 
 .genreContainer {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-
-  position: relative;
-  top: 30px
+  margin-top: auto;
+  
+  
 }
 
 .footer {
@@ -253,7 +252,7 @@ header {
   color: var(--text-faint);
   padding: var(--space-3);
 
-  height: 80px
+  
 }
 
 
@@ -287,12 +286,12 @@ header {
   font-size: var(--step--1);
   color: var(--text-faint);
   letter-spacing: 0.06em;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 
 #firstRow {
   display: flex;
-  gap: 10px;
+  gap: var(--space-2);
 }
 
 #searchBar {
@@ -300,7 +299,7 @@ header {
   background: var(--surface-raised);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
-  padding: 10px var(--space-3);
+  padding: var(--space-3) var(--space-3);
   color: white;
 }
 
@@ -308,7 +307,7 @@ header {
   background: var(--surface-raised);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
-  padding: 10px var(--space-3);
+  padding: var(--space-3) var(--space-3);
   color: white;
 }
 
@@ -319,7 +318,7 @@ header {
 .chipContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: var(--space-1);
 }
 
 .genreButtons {
@@ -327,9 +326,9 @@ header {
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   border-radius: var(--radius-pill);
-  padding: 5px var(--space-3);
+  padding: var(--space-1) var(--space-3);
   font-size: var(--step--1);
-  gap: 5px;
+  gap: var(--space-1);
 }
 
 .genreButtons:hover {
@@ -353,9 +352,9 @@ header {
   border: 1px solid var(--border-strong);
   color: var(--text-muted);
   border-radius: var(--radius-pill);
-  padding: 5px var(--space-3);
+  padding: var(--space-1) var(--space-3);
   font-size: var(--step--1);
-  gap: 5px;
+  gap: var(--space-1);
 }
 
 .platformButtons:hover {
@@ -393,5 +392,5 @@ header {
   border: none;
   border-radius: var(--radius);
   font-weight: 600;
-  padding: 12px;
+  padding: var(--space-3);
 }

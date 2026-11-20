@@ -1,25 +1,3 @@
-/*
- * GameShelf - your code goes here.
- *
- * The catalog is already loaded. GAMES is an array of 42 game objects,
- * defined in data/games.js, and it is available here because that script
- * tag comes first in index.html.
- *
- * Before you write anything: open index.html in your browser, open the
- * console (F12), and try these.
- *
- *   GAMES.length
- *   GAMES[0]
- *   GAMES[0].genres
- *   GAMES.map((game) => game.title)
- *   GAMES.filter((game) => game.year > 2020)
- *
- * Poking at real data in the console is the fastest way to understand the
- * shape of it, and you will do this for the rest of your career.
- *
- * Delete the line below once you have seen it work.
- */
-
 const grid = document.querySelector("#grid");
 
 let searchText = "";
@@ -194,7 +172,7 @@ const updateGrid = () => {
         });
     };
 
-    filteredGames = sortGames(sortBy, filteredGames);
+    filteredGames = getSortedGames(sortBy, filteredGames);
 
     grid.replaceChildren();
     cardGrid(filteredGames);
@@ -247,7 +225,7 @@ const resetFilters = () => {
         });
 };
 
-const searchBar = () => {
+const detectSearchInput = () => {
     const search = document.querySelector("#searchBar")
     
 
@@ -257,22 +235,18 @@ const searchBar = () => {
     })
 }
 
-const sortGames = (sortBy, games) => {
+const getSortedGames = (sortBy, games) => {
     const [property, direction] = sortBy.split("-");
         
     const highestSorted = games.toSorted((a,b) => a[property] - b[property]);
-    const lowestSorted = games.toSorted((a,b) => b[property] - a[property]);
+    const shortestSorted = games.toSorted((a,b) => b[property] - a[property]);
     const sortAtoZ = games.toSorted((a,b) => a.title.localeCompare(b.title));
-    const sortZtoA = games.toSorted((a,b) => b.title.localeCompare(a.title));
-
-
-    /*console.log(property) */
-        
+    const sortZtoA = games.toSorted((a,b) => b.title.localeCompare(a.title));  
 
     if (direction === "asc") {
         return highestSorted;
     } else if (direction === "desc") {
-        return lowestSorted;
+        return shortestSorted;
     }else if (sortBy === "aToZ") {
         return sortAtoZ;
     } else {
@@ -280,7 +254,7 @@ const sortGames = (sortBy, games) => {
     }
 }
 
-const sortingOptions = () => {
+const detectSortOptionChosen = () => {
     const sort = document.querySelector("#sort")
 
     sort.addEventListener("change", () => {
@@ -338,7 +312,7 @@ const createFilterOptions = (sortBy) => {
 
 }
 
-const genreFilters = () => {
+const detectGenreButtonClicked = () => {
     createFilterOptions("genre")
 
     const getButton = document.querySelectorAll(".genreButtons");
@@ -363,7 +337,7 @@ const genreFilters = () => {
     });
 }
 
-const platformFilters = () => {
+const detectPlatformButtonClicked = () => {
     createFilterOptions("platform");
     
     const getButton = document.querySelectorAll(".platformButtons")
@@ -388,9 +362,9 @@ const platformFilters = () => {
 }
 
 resetFilters();
-genreFilters();
-platformFilters();
-searchBar();
-sortingOptions();
+detectGenreButtonClicked();
+detectPlatformButtonClicked();
+detectSearchInput();
+detectSortOptionChosen();
 updateGrid();
 
