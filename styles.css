@@ -217,12 +217,14 @@ header {
 .year {
   font-size: var(--step--1);
   color: var(--text-muted);
+  margin-bottom: auto;
 }
 
 .blurb {
   font-size: var(--step-0);
   color: var(--text);
   flex: 1;
+  margin-bottom: auto;
 }
 
 .genreTags {
@@ -233,6 +235,7 @@ header {
   color: var(--text-muted);
   border-radius: var(--radius-pill);
   padding: var(--space-1) var(--space-2);
+  margin-bottom: auto;
 }
 
 .genreContainer {
@@ -245,9 +248,10 @@ header {
 }
 
 .footer {
-  border-top: 1px solid var(--border);
-  margin-top: var(--space-3);
+  padding-top: var(--space-3);
   display: flex;
+  position: relative;
+  align-items: center;
   
   font-size: var(--step--1);
   color: var(--text-faint);
@@ -256,14 +260,23 @@ header {
   
 }
 
-
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-4);
+  right: var(--space-4);
+  border-top: 1px solid var(--border);
+}
 
 .platforms {
   margin-right: auto;
+  min-width: 0;
 }
 
 .players {
   text-wrap: nowrap;
+  white-space: 0;
 }
 
 #searchContainer {
