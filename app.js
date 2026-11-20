@@ -5,44 +5,6 @@ let selectedGenres = [];
 let selectedPlatforms = [];
 let sortBy = "aToZ";
 
-const firstCard = () => {
-    const cards = document.createElement("div");
-    const cover = document.createElement("div");
-    const footer = document.createElement("div");
-
-    cards.classList.add("cards");
-    cover.classList.add("cover");
-    footer.classList.add("footer")
-
-    cover.style.background = `linear-gradient(${GAMES[0].coverFrom}, ${GAMES[0].coverTo})`;
-    cards.appendChild(cover);
-    
-
-    Object.entries(GAMES[0]).forEach(([key, value]) => {
-        const p = document.createElement("p");
-        p.classList.add(key);
-
-        p.textContent = ` ${value}`;
-        
-        if (key === "title" || key === "rating") {
-            if (key === "rating") {
-                p.textContent = value.toFixed(1);
-            }
-            cover.appendChild(p)
-        } else if (key === "players" || key === "avgHours" || key === "platforms") {
-            footer.appendChild(p)
-        } else if (key !== "coverFrom" && key !== "coverTo" && key !== "id") {
-            cards.appendChild(p) 
-        };
-        
-        cards.appendChild(footer);
-    });
-    grid.appendChild(cards);
-
-    
-};
-
-
 const cardGrid = (games) => {
     games.forEach((game) => {
         const body = document.createElement("div");
@@ -324,11 +286,9 @@ const detectGenreButtonClicked = () => {
             if (pressed === "false") {
                 button.setAttribute("aria-pressed", "true");
                 selectedGenres.push(button.id);
-                console.log(selectedGenres);
             } else {
                 button.setAttribute("aria-pressed", "false");
                 selectedGenres = selectedGenres.filter((genre) => genre !== button.id);
-                console.log(selectedGenres)
             }
 
             updateGrid();
@@ -349,11 +309,9 @@ const detectPlatformButtonClicked = () => {
             if (pressed === "false") {
                 button.setAttribute("aria-pressed", "true");
                 selectedPlatforms.push(button.id);
-                console.log(selectedPlatforms)
             } else {
                 button.setAttribute("aria-pressed", "false");
                 selectedPlatforms = selectedPlatforms.filter((platform) => platform !== button.id)
-                console.log(selectedPlatforms)
             }
 
             updateGrid();

@@ -397,3 +397,11 @@ header {
   font-weight: 600;
   padding: var(--space-3);
 }
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  color: var(--focus);
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
